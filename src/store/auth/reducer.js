@@ -1,6 +1,6 @@
 import * as TYPE from './types'
 
-const reducer = (initState = null, action) => {
+const userReducer = (initState = null, action) => {
   switch (action.type) {
     case TYPE.AUTH_LOGIN:
       return (initState = { ...action.payload })
@@ -15,4 +15,4 @@ const reducer = (initState = null, action) => {
   }
 }
 
-export default reducer
+export default userReducer

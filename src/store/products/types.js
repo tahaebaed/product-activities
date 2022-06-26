@@ -1,4 +1,4 @@
-export const AUTH_LOGIN = 'AUTH_LOGIN'
-export const AUTH_REGISTER = 'AUTH_REGISTER'
-export const AUTH_EDIT = 'AUTH_EDIT'
-export const AUTH_DELETE = 'AUTH_DELETE'
+export const GET_PRODUCT_LIST = 'GET_PRODUCT_LIST'
+export const GET_PRODUCT = 'GET_PRODUCT'
+export const UPDATE_PRODUCT = 'UPDATE_PRODUCT'
+export const DELETE_PRODUCT = 'DELETE_PRODUCT'
