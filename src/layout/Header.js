@@ -8,22 +8,23 @@ import Menu from '@mui/material/Menu'
 import MenuIcon from '@mui/icons-material/Menu'
 import Container from '@mui/material/Container'
 import Avatar from '@mui/material/Avatar'
-import Button from '@mui/material/Button'
 import Tooltip from '@mui/material/Tooltip'
 import MenuItem from '@mui/material/MenuItem'
 import Shop2Icon from '@mui/icons-material/Shop2'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 import '../sass/Navbar.scss'
+import { useDispatch, useSelector } from 'react-redux'
+import { handleLogOut } from '../store/auth/actions'
+import { Button } from '@mui/material'
 
 const Header = () => {
-  const [auth, setAuth] = useState(false)
   const NOT_AUTHENTICATED_PAGES = ['login', 'Sign up']
   const AUTHENTICATED_PAGES = ['Products', 'cart']
   const settings = ['Profile', 'Logout']
 
-  const [anchorElNav, setAnchorElNav] = React.useState(null)
-  const [anchorElUser, setAnchorElUser] = React.useState(null)
+  const [anchorElNav, setAnchorElNav] = useState(null)
+  const [anchorElUser, setAnchorElUser] = useState(null)
 
   const handleOpenNavMenu = event => {
     setAnchorElNav(event.currentTarget)
@@ -39,6 +40,10 @@ const Header = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null)
   }
+
+  const user = useSelector(state => state.user)
+
+  const dispatch = useDispatch()
 
   return (
     <AppBar position='static'>
@@ -92,50 +97,51 @@ const Header = () => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {auth
+              {user
                 ? AUTHENTICATED_PAGES.map(page => (
-                    <Link to={`/${page}`} className='link-small-screen'>
-                      <MenuItem
-                        onClick={handleCloseNavMenu}
-                        sx={{ mr: 3 }}
-                        key={page}
-                      >
+                    <Link
+                      to={`/user/${page}`}
+                      className='link-small-screen'
+                      key={page}
+                    >
+                      <MenuItem onClick={handleCloseNavMenu} sx={{ mr: 3 }}>
                         <Typography textAlign='center'>{page}</Typography>
                       </MenuItem>
                     </Link>
                   ))
                 : NOT_AUTHENTICATED_PAGES.map(page => (
-                    <Link to={`/${page}`} className='link-small-screen'>
-                      <MenuItem
-                        onClick={handleCloseNavMenu}
-                        sx={{ mr: 3 }}
-                        key={page}
-                      >
+                    <Link
+                      to={`/${page}`}
+                      className='link-small-screen'
+                      key={page}
+                    >
+                      <MenuItem onClick={handleCloseNavMenu} sx={{ mr: 3 }}>
                         <Typography textAlign='center'>{page}</Typography>
-                      </MenuItem>{' '}
+                      </MenuItem>
                     </Link>
                   ))}
             </Menu>
           </Box>
           <Shop2Icon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-          <Typography
-            variant='h5'
-            noWrap
-            component='a'
-            href=''
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            P-Activities
-          </Typography>
+
+          <NavLink to=''>
+            <Typography
+              variant='h5'
+              noWrap
+              sx={{
+                mr: 2,
+                display: { xs: 'flex', md: 'none' },
+                flexGrow: 1,
+                fontFamily: 'monospace',
+                fontWeight: 700,
+                letterSpacing: '.3rem',
+                color: 'inherit',
+                textDecoration: 'none',
+              }}
+            >
+              P-Activities
+            </Typography>
+          </NavLink>
           <Box
             sx={{
               flexGrow: 1,
@@ -143,14 +149,14 @@ const Header = () => {
               justifyContent: 'flex-end',
             }}
           >
-            {auth
+            {user
               ? AUTHENTICATED_PAGES.map(page => (
                   <Link
-                    to={`/${page}`}
+                    to={`/user/${page}`}
                     className='link-large-screen'
                     key={page}
                   >
-                    <MenuItem key={page} onClick={handleCloseNavMenu}>
+                    <MenuItem onClick={handleCloseNavMenu}>
                       <Typography textAlign='center'>{page}</Typography>
                     </MenuItem>
                   </Link>
@@ -168,11 +174,11 @@ const Header = () => {
                 ))}
           </Box>
 
-          {auth && (
+          {user && (
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title='Open settings'>
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, ml: 2 }}>
-                  <Avatar alt='Remy Sharp' src='/static/images/avatar/2.jpg' />
+                  <Avatar alt={`${user.name} Avatar`} src={user.Avatar} />
                 </IconButton>
               </Tooltip>
               <Menu
@@ -191,11 +197,16 @@ const Header = () => {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                {settings.map(setting => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign='center'>{setting}</Typography>
+                <Link to='/user/profile' className='link-small-screen'>
+                  <MenuItem onClick={handleCloseUserMenu}>
+                    <Typography textAlign='center'>Profile</Typography>
                   </MenuItem>
-                ))}
+                </Link>
+                <Link to='' className='link-small-screen'>
+                  <MenuItem onClick={() => dispatch(handleLogOut())}>
+                    <Typography textAlign='center'>Logout</Typography>
+                  </MenuItem>
+                </Link>
               </Menu>
             </Box>
           )}

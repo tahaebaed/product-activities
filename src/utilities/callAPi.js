@@ -1,4 +1,4 @@
-import instance from './axiosInstance'
+import { userInstance as instance } from './axiosInstance'
 import { useQuery } from 'react-query'
 
 function CallAPi({
