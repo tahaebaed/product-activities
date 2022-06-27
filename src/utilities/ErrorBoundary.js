@@ -1,4 +1,4 @@
-import { withErrorBoundary, useErrorBoundary } from 'react-use-error-boundary'
+import { useErrorBoundary } from 'react-use-error-boundary'
 
 const ErrorBoundary = ({ children }) => {
   const [error, resetError] = useErrorBoundary(

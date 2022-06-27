@@ -3,9 +3,16 @@ import * as TYPE from './types'
 const userReducer = (initState = null, action) => {
   switch (action.type) {
     case TYPE.AUTH_LOGIN:
+      localStorage.setItem('token', action.payload.token)
+      return (initState = { ...action.payload })
+    case TYPE.AUTH_LOGIN_WITH_TOKEN:
       return (initState = { ...action.payload })
     case TYPE.AUTH_REGISTER:
+      localStorage.setItem('token', action.payload.token)
       return (initState = { ...action.payload })
+    case TYPE.AUTH_LOGOUT:
+      localStorage.removeItem('token')
+      return (initState = null)
     case TYPE.AUTH_EDIT:
       return (initState = { ...action.payload })
     case TYPE.AUTH_DELETE:
