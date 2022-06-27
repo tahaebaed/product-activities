@@ -1,14 +1,28 @@
 import { Routes, Route } from 'react-router-dom'
 import React from 'react'
 
-import Index from '../pages/Index'
+import {
+  Home,
+  Login,
+  NotFound,
+  ProductList,
+  Profile,
+  Signup,
+} from './lazyLoading'
 
-const index = () => {
+const RenderRoutes = () => {
   return (
-    <Routes>
-      <Route path='/' element={<Index />} />
-    </Routes>
+    <React.Suspense fallback={<p>Loading ...</p>}>
+      <Routes>
+        <Route path='/' element={<Home />} exact />
+        <Route path='/login' element={<Login />} />
+        <Route path='/Sign%20up' element={<Signup />} />
+        <Route path='/user/profile' element={<Profile />} />
+        <Route path='/user/products' element={<ProductList />} />
+        <Route path='*' element={<NotFound />} />
+      </Routes>
+    </React.Suspense>
   )
 }
 
-export default index
+export default RenderRoutes

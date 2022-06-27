@@ -1,0 +1,28 @@
+.link-large-screen,
+.link-small-screen {
+  position: relative;
+  text-decoration: none;
+  color: #fff;
+  &::after {
+    content: '';
+    width: 0;
+    position: absolute;
+    bottom: 0;
+    background-color: #fff;
+    height: 4px;
+    display: block;
+    transition: width 1s linear;
+  }
+  &:hover {
+    &::after {
+      width: 100%;
+    }
+  }
+}
+
+.link-small-screen {
+  color: #000;
+  &::after {
+    background-color: #000;
+  }
+}
