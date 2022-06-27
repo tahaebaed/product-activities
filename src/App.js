@@ -1,5 +1,5 @@
 import logo from './logo.svg'
-import './App.css'
+import './App.scss'
 import Header from './layout/Header'
 import Screens from './pages/Index'
 import ErrorBoundary from './utilities/ErrorBoundary'

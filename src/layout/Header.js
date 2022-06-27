@@ -12,10 +12,13 @@ import Button from '@mui/material/Button'
 import Tooltip from '@mui/material/Tooltip'
 import MenuItem from '@mui/material/MenuItem'
 import Shop2Icon from '@mui/icons-material/Shop2'
+import { Link } from 'react-router-dom'
+
+import '../sass/Navbar.scss'
 
 const Header = () => {
-  const [auth, setAuth] = useState(true)
-  const NOT_AUTHENTICATED_PAGES = ['login', 'sign up']
+  const [auth, setAuth] = useState(false)
+  const NOT_AUTHENTICATED_PAGES = ['login', 'Sign up']
   const AUTHENTICATED_PAGES = ['Products', 'cart']
   const settings = ['Profile', 'Logout']
 
@@ -91,18 +94,26 @@ const Header = () => {
             >
               {auth
                 ? AUTHENTICATED_PAGES.map(page => (
-                    <MenuItem key={page} onClick={handleCloseNavMenu}>
-                      <Typography textAlign='center'>{page}</Typography>
-                    </MenuItem>
+                    <Link to={`/${page}`} className='link-small-screen'>
+                      <MenuItem
+                        onClick={handleCloseNavMenu}
+                        sx={{ mr: 3 }}
+                        key={page}
+                      >
+                        <Typography textAlign='center'>{page}</Typography>
+                      </MenuItem>
+                    </Link>
                   ))
                 : NOT_AUTHENTICATED_PAGES.map(page => (
-                    <MenuItem
-                      key={page}
-                      onClick={handleCloseNavMenu}
-                      sx={{ mr: 3 }}
-                    >
-                      <Typography textAlign='center'>{page}</Typography>
-                    </MenuItem>
+                    <Link to={`/${page}`} className='link-small-screen'>
+                      <MenuItem
+                        onClick={handleCloseNavMenu}
+                        sx={{ mr: 3 }}
+                        key={page}
+                      >
+                        <Typography textAlign='center'>{page}</Typography>
+                      </MenuItem>{' '}
+                    </Link>
                   ))}
             </Menu>
           </Box>
@@ -134,14 +145,26 @@ const Header = () => {
           >
             {auth
               ? AUTHENTICATED_PAGES.map(page => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography textAlign='center'>{page}</Typography>
-                  </MenuItem>
+                  <Link
+                    to={`/${page}`}
+                    className='link-large-screen'
+                    key={page}
+                  >
+                    <MenuItem key={page} onClick={handleCloseNavMenu}>
+                      <Typography textAlign='center'>{page}</Typography>
+                    </MenuItem>
+                  </Link>
                 ))
               : NOT_AUTHENTICATED_PAGES.map(page => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography textAlign='center'>{page}</Typography>
-                  </MenuItem>
+                  <Link
+                    to={`/${page}`}
+                    className='link-large-screen'
+                    key={page}
+                  >
+                    <MenuItem onClick={handleCloseNavMenu}>
+                      <Typography textAlign='center'>{page}</Typography>
+                    </MenuItem>
+                  </Link>
                 ))}
           </Box>
 
