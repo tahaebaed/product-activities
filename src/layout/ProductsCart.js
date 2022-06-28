@@ -36,7 +36,6 @@ const ProductsCart = () => {
               amount: Number(params.props.value),
             })
           )
-        console.log(params)
       },
     },
     {

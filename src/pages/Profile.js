@@ -1,9 +1,7 @@
 import { Settings } from '@mui/icons-material'
 import {
   Avatar,
-  Button,
   Card,
-  CardActions,
   CardContent,
   Grid,
   IconButton,
