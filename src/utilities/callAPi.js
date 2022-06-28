@@ -1,4 +1,3 @@
-import { userInstance as instance } from './axiosInstance'
 import { useQuery } from 'react-query'
 
 function CallAPi({
@@ -18,6 +17,7 @@ function CallAPi({
   onSuccess,
   onSettled,
   refetchOnWindowFocus,
+  instance,
 }) {
   const query = watchers ? [QueryName, ...watchers] : QueryName
 

@@ -7,6 +7,7 @@ import './App.scss'
 import CallAPi from './utilities/callAPi'
 import { useDispatch } from 'react-redux'
 import { handleLoginWithToken } from './store/auth/actions'
+import { userInstance } from './utilities/axiosInstance'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -18,6 +19,7 @@ const App = () => {
     retry: 0,
     refetchOnWindowFocus: false,
     onSuccess: res => dispatch(handleLoginWithToken(res.data)),
+    instance: userInstance,
   })
 
   return (
