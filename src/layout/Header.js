@@ -11,28 +11,35 @@ import Avatar from '@mui/material/Avatar'
 import Tooltip from '@mui/material/Tooltip'
 import MenuItem from '@mui/material/MenuItem'
 import Shop2Icon from '@mui/icons-material/Shop2'
+import AddShoppingCartRoundedIcon from '@mui/icons-material/AddShoppingCartRounded'
 import { Link, NavLink } from 'react-router-dom'
 
 import '../sass/Navbar.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { handleLogOut } from '../store/auth/actions'
-import { Button } from '@mui/material'
+import { Badge } from '@mui/material'
+import ProductsCart from './ProductsCart'
 
 const Header = () => {
   const NOT_AUTHENTICATED_PAGES = ['login', 'Sign up']
   const AUTHENTICATED_PAGES = ['Products', 'cart']
-  const settings = ['Profile', 'Logout']
 
   const [anchorElNav, setAnchorElNav] = useState(null)
   const [anchorElUser, setAnchorElUser] = useState(null)
-
+  const [anchorCart, setAnchorCart] = useState(null)
   const handleOpenNavMenu = event => {
     setAnchorElNav(event.currentTarget)
   }
   const handleOpenUserMenu = event => {
     setAnchorElUser(event.currentTarget)
   }
+  const handleOpenCartMenu = event => {
+    setAnchorCart(event.currentTarget)
+  }
 
+  const handleCloseCartMenu = () => {
+    setAnchorCart(null)
+  }
   const handleCloseNavMenu = () => {
     setAnchorElNav(null)
   }
@@ -42,7 +49,7 @@ const Header = () => {
   }
 
   const user = useSelector(state => state.user)
-
+  const cartList = useSelector(state => state.products)
   const dispatch = useDispatch()
 
   return (
@@ -97,7 +104,7 @@ const Header = () => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {user
+              {!user
                 ? AUTHENTICATED_PAGES.map(page => (
                     <Link
                       to={`/user/${page}`}
@@ -149,36 +156,60 @@ const Header = () => {
               justifyContent: 'flex-end',
             }}
           >
-            {user
-              ? AUTHENTICATED_PAGES.map(page => (
-                  <Link
-                    to={`/user/${page}`}
-                    className='link-large-screen'
-                    key={page}
+            {!user ? (
+              <>
+                <Link to={`/user/products`} className='link-large-screen'>
+                  <MenuItem onClick={handleCloseNavMenu}>
+                    <Typography textAlign='center'>Products</Typography>
+                  </MenuItem>
+                </Link>
+                <Box sx={{ flexGrow: 0 }}>
+                  <Tooltip title='Open settings'>
+                    <IconButton
+                      onClick={handleOpenCartMenu}
+                      sx={{ p: 0, ml: 2 }}
+                    >
+                      <Badge badgeContent={cartList.length} color='success'>
+                        <AddShoppingCartRoundedIcon />
+                      </Badge>
+                    </IconButton>
+                  </Tooltip>
+                  <Menu
+                    sx={{ mt: '45px' }}
+                    id='menu-appbar'
+                    anchorEl={anchorCart}
+                    anchorOrigin={{
+                      vertical: 'top',
+                      horizontal: 'right',
+                    }}
+                    keepMounted
+                    transformOrigin={{
+                      vertical: 'top',
+                      horizontal: 'right',
+                    }}
+                    open={Boolean(anchorCart)}
+                    onClose={handleCloseCartMenu}
                   >
-                    <MenuItem onClick={handleCloseNavMenu}>
-                      <Typography textAlign='center'>{page}</Typography>
-                    </MenuItem>
-                  </Link>
-                ))
-              : NOT_AUTHENTICATED_PAGES.map(page => (
-                  <Link
-                    to={`/${page}`}
-                    className='link-large-screen'
-                    key={page}
-                  >
-                    <MenuItem onClick={handleCloseNavMenu}>
-                      <Typography textAlign='center'>{page}</Typography>
-                    </MenuItem>
-                  </Link>
-                ))}
+                    <ProductsCart />
+                  </Menu>
+                </Box>
+              </>
+            ) : (
+              NOT_AUTHENTICATED_PAGES.map(page => (
+                <Link to={`/${page}`} className='link-large-screen' key={page}>
+                  <MenuItem onClick={handleCloseNavMenu}>
+                    <Typography textAlign='center'>{page}</Typography>
+                  </MenuItem>
+                </Link>
+              ))
+            )}
           </Box>
 
-          {user && (
+          {!user && (
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title='Open settings'>
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, ml: 2 }}>
-                  <Avatar alt={`${user.name} Avatar`} src={user.Avatar} />
+                  <Avatar alt={`${user?.name} Avatar`} src={user?.Avatar} />
                 </IconButton>
               </Tooltip>
               <Menu
@@ -203,7 +234,12 @@ const Header = () => {
                   </MenuItem>
                 </Link>
                 <Link to='' className='link-small-screen'>
-                  <MenuItem onClick={() => dispatch(handleLogOut())}>
+                  <MenuItem
+                    onClick={() => {
+                      dispatch(handleLogOut())
+                      handleCloseUserMenu()
+                    }}
+                  >
                     <Typography textAlign='center'>Logout</Typography>
                   </MenuItem>
                 </Link>

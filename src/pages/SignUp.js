@@ -1,5 +1,5 @@
 import { Button, CircularProgress, Container, Grid } from '@mui/material'
-import { Form, Formik, replace } from 'formik'
+import { Form, Formik } from 'formik'
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -9,7 +9,6 @@ import { object, string, number, ValidationError } from 'yup'
 import InputTextField from '../components/InputTextField'
 import { signUpHandle } from '../store/auth/actions'
 import { userInstance } from '../utilities/axiosInstance'
-import CallAPi from '../utilities/callAPi'
 
 const initialValues = {
   name: '',

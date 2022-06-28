@@ -5,6 +5,8 @@ export const userInstance = axios.create({
   baseURL: 'https://api-nodejs-todolist.herokuapp.com/',
   headers: {
     'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
   },
 })
 

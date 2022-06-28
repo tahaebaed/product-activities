@@ -1,5 +1,5 @@
 import { Settings } from '@mui/icons-material'
-import { Avatar, Button, Grid, IconButton, Typography } from '@mui/material'
+import { Avatar, Grid, IconButton, Typography } from '@mui/material'
 import { Box, Container } from '@mui/system'
 import React from 'react'
 import { useSelector } from 'react-redux'

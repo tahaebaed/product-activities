@@ -1,15 +1,34 @@
 import * as TYPE from './types'
 
-const productsReducer = (initState = null, action) => {
+const productsReducer = (
+  initState = JSON.parse(localStorage.getItem('cartItem')) || [],
+  action
+) => {
   switch (action.type) {
-    case TYPE.GET_PRODUCT_LIST:
-      return (initState = { ...action.payload })
-    case TYPE.GET_PRODUCT:
-      return (initState = { ...action.payload })
-    case TYPE.UPDATE_PRODUCT:
-      return (initState = { ...action.payload })
-    case TYPE.DELETE_PRODUCT:
-      return (initState = { ...action.payload })
+    case TYPE.ADD_CART_PRODUCT:
+      localStorage.setItem(
+        'cartItem',
+        JSON.stringify([...initState, action.payload])
+      )
+      return (initState = [...initState, action.payload])
+    case TYPE.REMOVE_CART_PRODUCT:
+      const filtered = initState.filter(
+        product => product.id !== action.payload
+      )
+      return (initState = filtered)
+
+    case TYPE.ADD_AMOUNT:
+      console.log(action.payload.id)
+      const updated = initState.map(item =>
+        item.id === action.payload.id
+          ? {
+              ...item,
+              amount: action.payload.amount,
+            }
+          : item
+      )
+      localStorage.setItem('cartItem', JSON.stringify(updated))
+      return (initState = updated)
     default:
       return initState
   }
