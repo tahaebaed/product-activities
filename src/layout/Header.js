@@ -167,7 +167,7 @@ const Header = () => {
                   <Tooltip title='Open settings'>
                     <IconButton
                       onClick={handleOpenCartMenu}
-                      sx={{ p: 0, ml: 2 }}
+                      sx={{ p: 0, mx: 1, mt: 0.9 }}
                     >
                       <Badge badgeContent={cartList.length} color='success'>
                         <AddShoppingCartRoundedIcon />
