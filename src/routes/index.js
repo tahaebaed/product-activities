@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom'
 import React from 'react'
 
 import {
+  EditProfile,
   Home,
   Login,
   NotFound,
@@ -19,6 +20,7 @@ const RenderRoutes = () => {
         <Route path='/Sign%20up' element={<Signup />} />
         <Route path='/user/profile' element={<Profile />} />
         <Route path='/user/products' element={<ProductList />} />
+        <Route path='/user/edit' element={<EditProfile />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
     </React.Suspense>

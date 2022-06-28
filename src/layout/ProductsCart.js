@@ -29,7 +29,6 @@ const ProductsCart = () => {
       width: 90,
       editable: true,
       preProcessEditCellProps: params => {
-        console.log(params)
         params.props.value &&
           dispatch(
             handleAddAmount({
@@ -37,6 +36,7 @@ const ProductsCart = () => {
               amount: Number(params.props.value),
             })
           )
+        console.log(params)
       },
     },
     {
@@ -47,7 +47,7 @@ const ProductsCart = () => {
         const onClick = e => {
           e.stopPropagation() // don't select this row after clicking
 
-          return dispatch(handleRemoveToCart(params.id))
+          dispatch(handleRemoveToCart(params.id))
         }
 
         return (
@@ -63,6 +63,8 @@ const ProductsCart = () => {
       <DataGrid
         rows={cartList}
         editMode='row'
+        pageSize={5}
+        rowsPerPageOptions={[5]}
         columns={columns}
         checkboxSelection
         disableSelectionOnClick

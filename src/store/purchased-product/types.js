@@ -1,0 +1,1 @@
+export const ADD_TO_PURCHASED = 'ADD_TO_PURCHASED'

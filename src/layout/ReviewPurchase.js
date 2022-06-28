@@ -20,7 +20,6 @@ export default function ReviewPurchase({ handleClose, open }) {
   return (
     <div>
       <Modal
-        keepMounted
         open={open}
         onClose={handleClose}
         aria-labelledby='keep-mounted-modal-title'
@@ -31,7 +30,7 @@ export default function ReviewPurchase({ handleClose, open }) {
             Text in a modal
           </Typography>
           <Box id='keep-mounted-modal-description' sx={{ mt: 2 }}>
-            <ReviewStepper />
+            <ReviewStepper closeModal={handleClose} />
           </Box>
         </Box>
       </Modal>
