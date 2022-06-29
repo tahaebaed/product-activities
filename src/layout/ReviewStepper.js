@@ -29,8 +29,6 @@ export default function ReviewStepper({ closeModal }) {
     setActiveStep(prevActiveStep => prevActiveStep - 1)
   }
 
-  const handleComplete = () => {}
-
   return (
     <Box sx={{ width: '400px' }}>
       <Stepper activeStep={activeStep} sx={{ mb: 4 }}>

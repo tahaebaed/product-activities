@@ -57,11 +57,11 @@ const Header = () => {
       <Container maxWidth='xl'>
         <Toolbar disableGutters>
           <Shop2Icon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-          <Typography
+          <Link
             variant='h6'
             noWrap
             component='a'
-            href='/'
+            to='/'
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -73,7 +73,7 @@ const Header = () => {
             }}
           >
             P-Activities
-          </Typography>
+          </Link>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -104,7 +104,7 @@ const Header = () => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {!user
+              {user
                 ? AUTHENTICATED_PAGES.map(page => (
                     <Link
                       to={`/user/${page}`}
@@ -156,7 +156,7 @@ const Header = () => {
               justifyContent: 'flex-end',
             }}
           >
-            {!user ? (
+            {user ? (
               <>
                 <Link to={`/user/products`} className='link-large-screen'>
                   <MenuItem onClick={handleCloseNavMenu}>
@@ -196,7 +196,11 @@ const Header = () => {
               </>
             ) : (
               NOT_AUTHENTICATED_PAGES.map(page => (
-                <Link to={`/${page}`} className='link-large-screen' key={page}>
+                <Link
+                  to={page === 'login' ? '/' : `/${page}`}
+                  className='link-large-screen'
+                  key={page}
+                >
                   <MenuItem onClick={handleCloseNavMenu}>
                     <Typography textAlign='center'>{page}</Typography>
                   </MenuItem>
@@ -205,11 +209,11 @@ const Header = () => {
             )}
           </Box>
 
-          {!user && (
+          {user && (
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title='Open settings'>
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, ml: 2 }}>
-                  <Avatar alt={`${user?.name} Avatar`} src={user?.Avatar} />
+                  <Avatar alt={`${user.name} Avatar`} src={user.avatar} />
                 </IconButton>
               </Tooltip>
               <Menu
@@ -233,7 +237,7 @@ const Header = () => {
                     <Typography textAlign='center'>Profile</Typography>
                   </MenuItem>
                 </Link>
-                <Link to='' className='link-small-screen'>
+                <Link to='/' className='link-small-screen'>
                   <MenuItem
                     onClick={() => {
                       dispatch(handleLogOut())

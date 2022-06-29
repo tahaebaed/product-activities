@@ -20,6 +20,7 @@ const App = () => {
     refetchOnWindowFocus: false,
     onSuccess: res => dispatch(handleLoginWithToken(res.data)),
     instance: userInstance,
+    enabled: !!localStorage.getItem('token'),
   })
 
   return (

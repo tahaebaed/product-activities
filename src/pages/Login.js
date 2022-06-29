@@ -58,27 +58,47 @@ const Login = () => {
   ]
   const dispatch = useDispatch()
   const handleSubmit = values =>
-    userInstance
-      .request({
-        method: 'POST',
-        url: '/user/login',
-        data: values,
-      })
+    new Promise((resolve, reject) => {
+      setTimeout(() => resolve(JSON.stringify(values)), 2000)
+    })
       .then(res => {
-        toast.success('You have logged successfully')
-
-        setTimeout(() => {
-          dispatch(
-            handleLogin({
-              ...res.data.user,
-              token: res.data.token,
-            })
-          )
-          navigate('/', { replace: true })
-          toast.success('You have logged in')
-        })
+        dispatch(
+          handleLogin({
+            ...JSON.parse(res),
+            avatar: '',
+            name: 'Taha Ebaed',
+            age: 27,
+            phone: '01118155231',
+            token:
+              Math.random().toString(36).substr(2) +
+              Math.random().toString(36).substr(2),
+          })
+        )
+        toast.success('login successfully')
+        navigate('/user/products')
       })
-      .catch(err => toast.error(err.message))
+      .catch(function (error) {
+        toast.error("couldn't login")
+      })
+  // userInstance
+  //   .request({
+  //     method: 'POST',
+  //     url: '/user/login',
+  //     data: values,
+  //   })
+  //   .then(res => {
+  //     setTimeout(() => {
+  //       dispatch(
+  //         handleLogin({
+  //           ...res.data.user,
+  //           token: res.data.token,
+  //         })
+  //       )
+  //       navigate('/', { replace: true })
+  //       toast.success('You have logged in')
+  //     })
+  //   })
+  //   .catch(err => toast.error(err.message))
 
   return (
     <Container maxWidth='md' sx={{ margin: '6rem auto' }}>

@@ -29,14 +29,16 @@ const ProductsCart = () => {
       width: 90,
       editable: true,
       preProcessEditCellProps: params => {
-        params.props.value &&
+        console.log(+params.props.value)
+        if (params.props.value && params.props.value > 1) {
           dispatch(
             handleAddAmount({
               id: params.id,
               amount: Number(params.props.value),
             })
           )
-        console.log(params)
+          return params.props.value
+        }
       },
     },
     {
