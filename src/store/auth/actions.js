@@ -16,3 +16,8 @@ export const signUpHandle = user => ({
 export const handleLogOut = () => ({
   type: TYPE.AUTH_LOGOUT,
 })
+
+export const handleEdit = payload => ({
+  type: TYPE.AUTH_EDIT,
+  payload,
+})

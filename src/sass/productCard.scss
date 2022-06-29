@@ -1,0 +1,28 @@
+.card-container {
+  position: relative;
+
+  &-link {
+    text-decoration: none;
+    background-color: gray;
+  }
+  &-cart_btn {
+    position: absolute;
+    right: 3rem;
+    bottom: 5rem;
+  }
+  .card-holder {
+    &-hover-state {
+      padding: 0.5rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 2; /* number of lines to show */
+      line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+    &:hover {
+      .card-holder-hover-state {
+        background-color: gray;
+        color: white;
+      }
+    }
+  }
+}

@@ -1,10 +1,14 @@
-import { Button, Grid } from '@mui/material'
-import { Form, Formik } from 'formik'
+import { Button, CircularProgress, Grid } from '@mui/material'
+import { Field, Form, Formik } from 'formik'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { toast } from 'react-toastify'
 import { number, object, string } from 'yup'
 import InputTextField from '../components/InputTextField'
-import { handleAddToPurchased } from '../store/purchased-product/actions'
+import { UploadImg } from '../components/UploadImg'
+import { handleEdit } from '../store/auth/actions'
+
+import '../sass/EditProfile.scss'
 
 const EditProfile = () => {
   const initialValues = {
@@ -13,6 +17,7 @@ const EditProfile = () => {
     email: '',
     name: '',
     age: '',
+    avatar: '',
   }
 
   const validationSchema = object({
@@ -58,14 +63,25 @@ const EditProfile = () => {
       type: 'number',
     },
   ]
+  const dispatched = async values => {
+    dispatch()
+  }
 
   const reviewList = useSelector(state => state.review)
+  const user = useSelector(state => state.user)
   const dispatch = useDispatch()
-  const onSubmit = values => {
-    setTimeout(() => {
-      console.log(values)
-    }, 2000)
-  }
+  const onSubmit = values =>
+    new Promise((resolve, reject) => {
+      setTimeout(() => resolve(JSON.stringify(values)), 2000)
+    })
+      .then(res => {
+        dispatch(handleEdit(JSON.parse(res)))
+        toast.success('Edit successfully')
+      })
+      .catch(function (error) {
+        alert('The error is handled, continue normally')
+      })
+
   return (
     <Formik
       initialValues={initialValues}
@@ -85,6 +101,9 @@ const EditProfile = () => {
                 />
               </Grid>
             ))}
+            <Grid item xs={6}>
+              <UploadImg name='avatar' user={user} {...formik} />
+            </Grid>
           </Grid>
           <Grid container mt={4} justifyContent='center'>
             <Grid item>
@@ -93,7 +112,13 @@ const EditProfile = () => {
                 type='submit'
                 disabled={!formik.isValid || formik.isSubmitting}
               >
-                Edit
+                {formik.isSubmitting ? (
+                  <>
+                    <CircularProgress size='1rem' sx={{ mr: 1 }} /> Editing
+                  </>
+                ) : (
+                  'Edit'
+                )}
               </Button>
             </Grid>
           </Grid>

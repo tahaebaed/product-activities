@@ -30,7 +30,11 @@ const Profile = () => {
               sx={{ mt: 2 }}
             >
               <Grid item>
-                <Avatar src='aaa' alt={`${user?.name} avatar`} sizes='2rem' />
+                <Avatar
+                  src={user.avatar}
+                  alt={`${user?.name} avatar`}
+                  sizes='2rem'
+                />
               </Grid>
               <Grid item>
                 <Typography variant='h5'>
@@ -55,6 +59,12 @@ const Profile = () => {
                 </Typography>
                 <Grid item>
                   <Typography> age: {user?.age || 27}</Typography>
+                </Grid>
+                <Grid item>
+                  <Typography> Phone: {user?.phone}</Typography>
+                </Grid>
+                <Grid item>
+                  <Typography> email: {user?.email}</Typography>
                 </Grid>
               </Grid>
             </Grid>

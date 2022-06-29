@@ -1,0 +1,13 @@
+.profile-avatar {
+  position: relative;
+
+  &_img {
+    width: 80px;
+    border-radius: 50%;
+    &-icon {
+      position: absolute;
+      bottom: -0.8rem;
+      right: 0;
+    }
+  }
+}

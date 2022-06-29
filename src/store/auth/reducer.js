@@ -8,13 +8,15 @@ const userReducer = (initState = null, action) => {
     case TYPE.AUTH_LOGIN_WITH_TOKEN:
       return (initState = { ...action.payload })
     case TYPE.AUTH_REGISTER:
+      localStorage.setItem('users', JSON.stringify([{ ...action.payload }]))
       localStorage.setItem('token', action.payload.token)
+
       return (initState = { ...action.payload })
     case TYPE.AUTH_LOGOUT:
       localStorage.removeItem('token')
       return (initState = null)
     case TYPE.AUTH_EDIT:
-      return (initState = { ...action.payload })
+      return (initState = { ...initState, ...action.payload })
     case TYPE.AUTH_DELETE:
       return (initState = { ...action.payload })
     default:
