@@ -66,6 +66,7 @@ const Login = () => {
             user.user.email === values.email &&
             user.user.password === values.password
         )
+      console.log(emailCheck)
       setTimeout(
         () =>
           emailCheck?.length > 0
@@ -93,7 +94,8 @@ const Login = () => {
         navigate('/user/products')
       })
       .catch(function (error) {
-        toast.error(error.message)
+        console.log(error)
+        toast.error(error)
       })
   // userInstance
   //   .request({

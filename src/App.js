@@ -4,24 +4,24 @@ import ErrorBoundary from './utilities/ErrorBoundary'
 
 import 'react-toastify/dist/ReactToastify.css'
 import './App.scss'
-import CallAPi from './utilities/callAPi'
-import { useDispatch } from 'react-redux'
-import { handleLoginWithToken } from './store/auth/actions'
-import { userInstance } from './utilities/axiosInstance'
+// import CallAPi from './utilities/callAPi'
+// import { useDispatch } from 'react-redux'
+// import { handleLoginWithToken } from './store/auth/actions'
+// import { userInstance } from './utilities/axiosInstance'
 
 const App = () => {
-  const dispatch = useDispatch()
-  CallAPi({
-    QueryName: 'User Via token',
-    axios: true,
-    url: '/user/me',
-    method: 'GET',
-    retry: 0,
-    refetchOnWindowFocus: false,
-    onSuccess: res => dispatch(handleLoginWithToken(res.data)),
-    instance: userInstance,
-    enabled: !!localStorage.getItem('token'),
-  })
+  // const dispatch = useDispatch()
+  // CallAPi({
+  //   QueryName: 'User Via token',
+  //   axios: true,
+  //   url: '/user/me',
+  //   method: 'GET',
+  //   retry: 0,
+  //   refetchOnWindowFocus: false,
+  //   onSuccess: res => dispatch(handleLoginWithToken(res.data)),
+  //   instance: userInstance,
+  //   enabled: !!localStorage.getItem('token'),
+  // })
 
   return (
     <div className='App'>
