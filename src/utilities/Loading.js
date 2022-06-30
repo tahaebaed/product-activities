@@ -5,7 +5,7 @@ import React from 'react'
 const Loading = () => {
   return (
     <Box>
-      <Grid container justifyContent='center' alignItem='center' mt='7rem'>
+      <Grid container justifyContent='center' mt='7rem'>
         <Grid item>
           <CircularProgress size='4rem' />
         </Grid>

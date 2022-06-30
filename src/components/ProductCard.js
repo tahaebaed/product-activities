@@ -1,10 +1,9 @@
 import * as React from 'react'
 import Card from '@mui/material/Card'
-import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
-import { Button, Grid, IconButton } from '@mui/material'
+import { IconButton } from '@mui/material'
 import { AddShoppingCartRounded } from '@mui/icons-material'
 import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded'
 import { useDispatch, useSelector } from 'react-redux'
@@ -20,49 +19,41 @@ function ProductCard({ product }) {
 
   const filtered = cartList.filter(cartProd => cartProd.id === product.id)
   return (
-    <Box className='card-container' sx={{ maxWidth: 300, maxHeight: 350 }}>
+    <Box className='card-container' sx={{ maxWidth: 550, maxHeight: 600 }}>
       <Link to={`/product/${product.id}`} className='card-container-link'>
-        <Card className='card-holder'>
+        <Card sx={{ display: 'flex' }}>
+          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+            <CardContent sx={{ flex: '1 0 auto' }}>
+              <Typography component='div' variant='h5'>
+                {product.title}
+              </Typography>
+              <Typography
+                variant='subtitle1'
+                color='text.secondary'
+                component='div'
+                className='title'
+              >
+                price: {product.price}$
+              </Typography>
+            </CardContent>
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                pl: 1,
+                pb: 1,
+              }}
+              className='description'
+            >
+              {product.description}
+            </Box>
+          </Box>
           <CardMedia
             component='img'
-            height='150'
-            sx={{ objectFit: 'contain' }}
+            sx={{ width: 80, objectFit: 'contain' }}
             image={product.image}
-            alt='green iguana'
+            alt='Live from space album cover'
           />
-          <CardContent>
-            <Grid
-              container
-              direction='column'
-              alignItems='flex-start'
-              className='card-holder-hover-state'
-            >
-              <Grid item>
-                <Typography variant='caption' component='p'>
-                  Category: {product.category}
-                </Typography>
-              </Grid>
-              <Grid item>
-                <Typography variant='caption' component='p'>
-                  Price: {product.price}
-                </Typography>
-              </Grid>
-            </Grid>
-            <Grid container className='card-holder-hover-state'>
-              <Grid item md={10}>
-                <Typography
-                  gutterBottom
-                  variant='subtitle1'
-                  component='h4'
-                  sx={{ minHeight: '60px' }}
-                >
-                  {product.title}
-                </Typography>
-              </Grid>
-
-              <Grid item md={2}></Grid>
-            </Grid>
-          </CardContent>
         </Card>
       </Link>
 

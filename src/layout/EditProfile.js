@@ -1,5 +1,5 @@
 import { Button, CircularProgress, Grid } from '@mui/material'
-import { Field, Form, Formik } from 'formik'
+import { Form, Formik } from 'formik'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
@@ -63,11 +63,7 @@ const EditProfile = () => {
       type: 'number',
     },
   ]
-  const dispatched = async values => {
-    dispatch()
-  }
 
-  const reviewList = useSelector(state => state.review)
   const user = useSelector(state => state.user)
   const dispatch = useDispatch()
   const onSubmit = values =>

@@ -37,7 +37,7 @@ const ProductsCart = () => {
               amount: Number(params.props.value),
             })
           )
-          return params.props.value
+          return params.props
         }
       },
     },

@@ -7,16 +7,13 @@
   }
   &-cart_btn {
     position: absolute;
-    right: 3rem;
-    bottom: 5rem;
+    right: 0.5rem;
+    top: 0;
   }
   .card-holder {
     &-hover-state {
+      height: 100px;
       padding: 0.5rem;
-      display: -webkit-box;
-      -webkit-line-clamp: 2; /* number of lines to show */
-      line-clamp: 2;
-      -webkit-box-orient: vertical;
     }
     &:hover {
       .card-holder-hover-state {
@@ -25,4 +22,13 @@
       }
     }
   }
+  &:hover {
+    scale: 1;
+  }
+}
+.description {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }

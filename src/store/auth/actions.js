@@ -9,7 +9,7 @@ export const handleLoginWithToken = user => ({
   payload: user,
 })
 export const signUpHandle = user => ({
-  type: TYPE.AUTH_LOGIN,
+  type: TYPE.AUTH_REGISTER,
   payload: user,
 })
 
