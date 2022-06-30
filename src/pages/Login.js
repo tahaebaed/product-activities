@@ -8,7 +8,6 @@ import { object, string, ValidationError } from 'yup'
 
 import InputTextField from '../components/InputTextField'
 import { handleLogin } from '../store/auth/actions'
-import { userInstance } from '../utilities/axiosInstance'
 
 const initialValues = {
   email: '',
@@ -59,7 +58,23 @@ const Login = () => {
   const dispatch = useDispatch()
   const handleSubmit = values =>
     new Promise((resolve, reject) => {
-      setTimeout(() => resolve(JSON.stringify(values)), 2000)
+      const users = JSON.parse(localStorage.getItem('users'))
+      const emailCheck =
+        users &&
+        users.filter(
+          user =>
+            user.user.email === values.email &&
+            user.user.password === values.password
+        )
+      setTimeout(
+        () =>
+          emailCheck?.length > 0
+            ? resolve(JSON.stringify(values))
+            : reject(
+                'Your email or password is incorrect or you need to register'
+              ),
+        2000
+      )
     })
       .then(res => {
         dispatch(
@@ -78,7 +93,7 @@ const Login = () => {
         navigate('/user/products')
       })
       .catch(function (error) {
-        toast.error("couldn't login")
+        toast.error(error.message)
       })
   // userInstance
   //   .request({
