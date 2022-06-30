@@ -21,10 +21,10 @@ function ProductCard({ product }) {
   return (
     <Box className='card-container' sx={{ maxWidth: 550, maxHeight: 600 }}>
       <Link to={`/product/${product.id}`} className='card-container-link'>
-        <Card sx={{ display: 'flex' }}>
+        <Card sx={{ display: 'flex' }} className='card-holder'>
           <Box sx={{ display: 'flex', flexDirection: 'column' }}>
             <CardContent sx={{ flex: '1 0 auto' }}>
-              <Typography component='div' variant='h5'>
+              <Typography component='div' variant='h6' className='title'>
                 {product.title}
               </Typography>
               <Typography

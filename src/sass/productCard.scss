@@ -1,6 +1,7 @@
 .card-container {
   position: relative;
-
+  transform: scale(1);
+  transition: all 1s;
   &-link {
     text-decoration: none;
     background-color: gray;
@@ -11,6 +12,7 @@
     top: 0;
   }
   .card-holder {
+    padding-right: 2rem;
     &-hover-state {
       height: 100px;
       padding: 0.5rem;
@@ -23,12 +25,24 @@
     }
   }
   &:hover {
-    scale: 1;
+    transform: scale(1.05);
   }
 }
 .description {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
   overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* number of lines to show */
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  width: 80%;
+}
+
+.title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* number of lines to show */
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
