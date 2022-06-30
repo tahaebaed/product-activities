@@ -1,5 +1,5 @@
-import { CircularProgress, Grid } from '@mui/material'
-import React, { useCallback, useLayoutEffect, useRef } from 'react'
+import { Grid } from '@mui/material'
+import React, { useLayoutEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import ProductCard from '../components/ProductCard'
 import ProductContainer from '../layout/ProductContainer'
@@ -25,7 +25,7 @@ const ProductList = () => {
       <Grid item md={12}>
         <ProductContainer>
           {data.data.map((product, index, arr) => (
-            <Grid item xs={12} md={4} sx={{ mb: 3 }} key={product.id}>
+            <Grid item xs={12} md={6} sx={{ mb: 3 }} key={index}>
               <ProductCard product={product} />
             </Grid>
           ))}

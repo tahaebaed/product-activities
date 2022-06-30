@@ -57,21 +57,7 @@ const Header = () => {
       <Container maxWidth='xl'>
         <Toolbar disableGutters>
           <Shop2Icon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-          <Link
-            variant='h6'
-            noWrap
-            component='a'
-            to='/'
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
+          <Link variant='h6' component='a' to='/' className='Nav-Link'>
             P-Activities
           </Link>
 

@@ -22,8 +22,8 @@ const ProductInfo = () => {
   })
   const cartList = useSelector(state => state.products)
   const dispatch = useDispatch()
-  const filtered = cartList.filter(cartProd => cartProd.id === id)
-
+  const filtered =
+    data && cartList.filter(cartProd => cartProd.id === data.data.id)
   return isFetching ? (
     <Loading />
   ) : (
@@ -35,34 +35,37 @@ const ProductInfo = () => {
           </div>
         </Grid>
         <Grid item xs={12} md={6}>
-          {filtered.length > 0 ? (
-            <IconButton
-              className='card-container-cart_btn'
-              onClick={() => dispatch(handleRemoveToCart(data.data.id))}
-            >
-              <ShoppingCartRoundedIcon />
-            </IconButton>
-          ) : (
-            <IconButton
-              className='card-container-cart_btn'
-              onClick={() =>
-                dispatch(
-                  handleAddToCart({
-                    id: data.data.id,
-                    name: data.data.title,
-                    amount: 1,
-                    price: data.data.price,
-                  })
-                )
-              }
-            >
-              <AddShoppingCartRounded />
-            </IconButton>
-          )}
+          <Grid container justifyContent='flex-end'>
+            {filtered.length > 0 ? (
+              <IconButton
+                className='card-container-cart_btn'
+                onClick={() => dispatch(handleRemoveToCart(data.data.id))}
+              >
+                <ShoppingCartRoundedIcon />
+              </IconButton>
+            ) : (
+              <IconButton
+                className='card-container-cart_btn'
+                onClick={() =>
+                  dispatch(
+                    handleAddToCart({
+                      id: data.data.id,
+                      name: data.data.title,
+                      amount: 1,
+                      price: data.data.price,
+                    })
+                  )
+                }
+              >
+                <AddShoppingCartRounded />
+              </IconButton>
+            )}
+          </Grid>
           <Typography variant='h5' component='h5'>
             Name:
           </Typography>
           <Typography mb={2}>{data.data.title}</Typography>
+
           <Typography variant='h5' component='h5'>
             Description:
           </Typography>
