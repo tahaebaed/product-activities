@@ -33,7 +33,7 @@ const Profile = () => {
                 <Avatar
                   src={user.avatar}
                   alt={`${user?.name} avatar`}
-                  sizes='2rem'
+                  sx={{ objectFit: 'contain' }}
                 />
               </Grid>
               <Grid item>

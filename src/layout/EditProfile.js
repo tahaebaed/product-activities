@@ -67,23 +67,23 @@ const EditProfile = () => {
 
   const user = useSelector(state => state.user)
   const dispatch = useDispatch()
-  const onSubmit = values => dispatch(handleEdit(values))
-  // new Promise((resolve, reject) => {
-  //   setTimeout(
-  //     () =>
-  //       user
-  //         ? resolve(JSON.stringify(values))
-  //         : reject('something went wrong'),
-  //     2000
-  //   )
-  // })
-  //   .then(res => {
-
-  //     toast.success('Edit successfully')
-  //   })
-  //   .catch(error => {
-  //     toast.error('something went wrong')
-  //   })
+  const onSubmit = values =>
+    new Promise((resolve, reject) => {
+      setTimeout(
+        () =>
+          user
+            ? resolve(JSON.stringify(values))
+            : reject('something went wrong'),
+        2000
+      )
+    })
+      .then(res => {
+        dispatch(handleEdit(values))
+        toast.success('Edit successfully')
+      })
+      .catch(error => {
+        toast.error('something went wrong')
+      })
 
   return (
     <Formik
