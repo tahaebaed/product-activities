@@ -8,6 +8,7 @@ import { handleAddToCart, handleRemoveToCart } from '../store/products/actions'
 import CallAPi from '../utilities/callAPi'
 import Loading from '../utilities/Loading'
 import { productInstance } from '../utilities/productsInstance'
+import { toast } from 'react-toastify'
 
 const ProductInfo = () => {
   const { id } = useParams()
@@ -39,14 +40,17 @@ const ProductInfo = () => {
             {filtered.length > 0 ? (
               <IconButton
                 className='card-container-cart_btn'
-                onClick={() => dispatch(handleRemoveToCart(data.data.id))}
+                onClick={() => {
+                  dispatch(handleRemoveToCart(data.data.id))
+                  toast.info(`${data.data.title} has been removed from cart`)
+                }}
               >
                 <ShoppingCartRoundedIcon />
               </IconButton>
             ) : (
               <IconButton
                 className='card-container-cart_btn'
-                onClick={() =>
+                onClick={() => {
                   dispatch(
                     handleAddToCart({
                       id: data.data.id,
@@ -55,7 +59,8 @@ const ProductInfo = () => {
                       price: data.data.price,
                     })
                   )
-                }
+                  toast.info(`${data.data.title} has been added from cart`)
+                }}
               >
                 <AddShoppingCartRounded />
               </IconButton>

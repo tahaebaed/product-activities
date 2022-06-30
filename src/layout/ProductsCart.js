@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
+import { toast } from 'react-toastify'
 
 import Box from '@mui/material/Box'
 import { DataGrid } from '@mui/x-data-grid'
@@ -50,6 +51,7 @@ const ProductsCart = () => {
           e.stopPropagation() // don't select this row after clicking
 
           dispatch(handleRemoveToCart(params.id))
+          toast.info(`${params.row.name} has been removed`)
         }
 
         return (

@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { handleAddToCart, handleRemoveToCart } from '../store/products/actions'
 import { Link } from 'react-router-dom'
 import { Box } from '@mui/system'
+import { toast } from 'react-toastify'
 
 import '../sass/productCard.scss'
 
@@ -60,14 +61,17 @@ function ProductCard({ product }) {
       {filtered.length > 0 ? (
         <IconButton
           className='card-container-cart_btn'
-          onClick={() => dispatch(handleRemoveToCart(product.id))}
+          onClick={() => {
+            dispatch(handleRemoveToCart(product.id))
+            toast.info(`${product.title} has been removed from cart`)
+          }}
         >
           <ShoppingCartRoundedIcon />
         </IconButton>
       ) : (
         <IconButton
           className='card-container-cart_btn'
-          onClick={() =>
+          onClick={() => {
             dispatch(
               handleAddToCart({
                 id: product.id,
@@ -76,7 +80,8 @@ function ProductCard({ product }) {
                 price: product.price,
               })
             )
-          }
+            toast.info(`${product.title} has been added from cart`)
+          }}
         >
           <AddShoppingCartRounded />
         </IconButton>

@@ -76,6 +76,11 @@ const Profile = () => {
               <Typography variant='h4' component='h5'>
                 Purchased Products:
               </Typography>
+              {purchased.length < 1 && (
+                <Typography variant='h5' mt={5} component='h5'>
+                  You didn't purchase any Item yet
+                </Typography>
+              )}
               {purchased.map(item => (
                 <Grid item key={item.purchasedAt}>
                   {item.items.map((prod, index) => (
