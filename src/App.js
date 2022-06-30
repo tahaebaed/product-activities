@@ -4,13 +4,15 @@ import ErrorBoundary from './utilities/ErrorBoundary'
 
 import 'react-toastify/dist/ReactToastify.css'
 import './App.scss'
+import { handleLoginWithToken } from './store/auth/actions'
+import { useEffect } from 'react'
 // import CallAPi from './utilities/callAPi'
-// import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 // import { handleLoginWithToken } from './store/auth/actions'
 // import { userInstance } from './utilities/axiosInstance'
 
 const App = () => {
-  // const dispatch = useDispatch()
+  const dispatch = useDispatch()
   // CallAPi({
   //   QueryName: 'User Via token',
   //   axios: true,
@@ -22,6 +24,15 @@ const App = () => {
   //   instance: userInstance,
   //   enabled: !!localStorage.getItem('token'),
   // })
+
+  !!localStorage.getItem('token') &&
+    new Promise((resolve, reject) => {
+      setTimeout(() => resolve(localStorage.getItem('token')), 2000)
+    }).then(res => {
+      const users = JSON.parse(localStorage.getItem('users'))
+      const getUser = users.filter(user => user.token === res)
+      dispatch(handleLoginWithToken(getUser[0]))
+    })
 
   return (
     <div className='App'>

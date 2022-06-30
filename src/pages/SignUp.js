@@ -77,7 +77,7 @@ const SignUp = () => {
     new Promise((resolve, reject) => {
       const users = JSON.parse(localStorage.getItem('users'))
       const emailCheck =
-        users && users.filter(user => user.user.email === values.email)
+        users && users.filter(user => user.email === values.email)
       setTimeout(
         () =>
           emailCheck?.length > 0
@@ -89,9 +89,7 @@ const SignUp = () => {
       .then(res => {
         dispatch(
           signUpHandle({
-            user: {
-              ...JSON.parse(res),
-            },
+            ...JSON.parse(res),
             avatar: '',
             token:
               Math.random().toString(36).substr(2) +

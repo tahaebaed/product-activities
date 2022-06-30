@@ -63,8 +63,8 @@ const Login = () => {
         users &&
         users.filter(
           user =>
-            user.user.email === values.email &&
-            user.user.password === values.password
+            user.email === values.email.toLowerCase() &&
+            user.password === values.password
         )
       console.log(emailCheck)
       setTimeout(

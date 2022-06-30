@@ -9,6 +9,7 @@ import { UploadImg } from '../components/UploadImg'
 import { handleEdit } from '../store/auth/actions'
 
 import '../sass/EditProfile.scss'
+import { Box, Container } from '@mui/system'
 
 const EditProfile = () => {
   const initialValues = {
@@ -66,17 +67,23 @@ const EditProfile = () => {
 
   const user = useSelector(state => state.user)
   const dispatch = useDispatch()
-  const onSubmit = values =>
-    new Promise((resolve, reject) => {
-      setTimeout(() => resolve(JSON.stringify(values)), 2000)
-    })
-      .then(res => {
-        dispatch(handleEdit(JSON.parse(res)))
-        toast.success('Edit successfully')
-      })
-      .catch(function (error) {
-        alert('The error is handled, continue normally')
-      })
+  const onSubmit = values => dispatch(handleEdit(values))
+  // new Promise((resolve, reject) => {
+  //   setTimeout(
+  //     () =>
+  //       user
+  //         ? resolve(JSON.stringify(values))
+  //         : reject('something went wrong'),
+  //     2000
+  //   )
+  // })
+  //   .then(res => {
+
+  //     toast.success('Edit successfully')
+  //   })
+  //   .catch(error => {
+  //     toast.error('something went wrong')
+  //   })
 
   return (
     <Formik
@@ -86,38 +93,41 @@ const EditProfile = () => {
     >
       {formik => (
         <Form>
-          <Grid container spacing={3} p={6} direction='row'>
-            {inputFields.map((input, index) => (
-              <Grid item key={index} xs={6}>
-                <InputTextField
-                  fieldName={input.name}
-                  label={input.label}
-                  placeholder={input.placeholder}
-                  type={input.type}
-                />
+          <Container>
+            <Grid container spacing={3} p={7}>
+              <Grid item xs={12}>
+                <UploadImg name='avatar' user={user} {...formik} />
               </Grid>
-            ))}
-            <Grid item xs={6}>
-              <UploadImg name='avatar' user={user} {...formik} />
+              {inputFields.map((input, index) => (
+                <Grid item key={index} xs={12} sm={12}>
+                  <InputTextField
+                    fieldName={input.name}
+                    label={input.label}
+                    placeholder={input.placeholder}
+                    type={input.type}
+                  />
+                </Grid>
+              ))}
             </Grid>
-          </Grid>
-          <Grid container mt={4} justifyContent='center'>
-            <Grid item>
-              <Button
-                variant='contained'
-                type='submit'
-                disabled={!formik.isValid || formik.isSubmitting}
-              >
-                {formik.isSubmitting ? (
-                  <>
-                    <CircularProgress size='1rem' sx={{ mr: 1 }} /> Editing
-                  </>
-                ) : (
-                  'Edit'
-                )}
-              </Button>
+            <Grid container justifyContent='center'>
+              <Grid item>
+                <Button
+                  size='large'
+                  variant='contained'
+                  type='submit'
+                  disabled={!formik.isValid || formik.isSubmitting}
+                >
+                  {formik.isSubmitting ? (
+                    <>
+                      <CircularProgress size='1rem' sx={{ mr: 1 }} /> Editing
+                    </>
+                  ) : (
+                    'Edit'
+                  )}
+                </Button>
+              </Grid>
             </Grid>
-          </Grid>
+          </Container>
         </Form>
       )}
     </Formik>
