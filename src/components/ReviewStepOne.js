@@ -1,5 +1,6 @@
-import { Button, Grid } from '@mui/material'
-import { Box } from '@mui/system'
+import Grid from '@mui/material/Grid'
+import Button from '@mui/material/Button'
+import Box from '@mui/system/Box'
 import React from 'react'
 import { useSelector } from 'react-redux'
 
@@ -10,8 +11,8 @@ const ReviewStepOne = ({ handleNext }) => {
     reviewList.reduce((a, b) => a.price * a.amount + b.price * b.amount)
   return (
     <Box>
-      {reviewList.map(prod => (
-        <Grid container justifyContent='space-between' mb={3} key={prod.id}>
+      {reviewList.map((prod, index) => (
+        <Grid container justifyContent='space-between' mb={3} key={index}>
           <Grid item sm={12} md={12} mb={1}>
             Name: {prod.name}
           </Grid>

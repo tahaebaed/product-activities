@@ -1,13 +1,12 @@
 .profile-avatar {
   position: relative;
-
-  &_img {
-    width: 80px;
-    border-radius: 10px;
-    &-icon {
-      position: absolute;
-      bottom: -0.8rem;
-      right: -1rem;
-    }
-  }
+}
+.profile-avatar_img {
+  width: 80px;
+  border-radius: 10px;
+}
+.profile-avatar_img-icon {
+  position: absolute;
+  bottom: -0.8rem;
+  right: -1rem;
 }

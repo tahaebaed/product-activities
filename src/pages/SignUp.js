@@ -1,4 +1,7 @@
-import { Button, CircularProgress, Container, Grid } from '@mui/material'
+import Grid from '@mui/material/Grid'
+import Container from '@mui/material/Container'
+import CircularProgress from '@mui/material/CircularProgress'
+import Button from '@mui/material/Button'
 import { Form, Formik } from 'formik'
 import React from 'react'
 import { useDispatch } from 'react-redux'
@@ -9,6 +12,7 @@ import { object, string, number } from 'yup'
 
 import InputTextField from '../components/InputTextField'
 import { signUpHandle } from '../store/auth/actions'
+import { signUpValidationSchema } from '../utilities/validationsSchemas'
 
 const initialValues = {
   name: '',
@@ -17,26 +21,6 @@ const initialValues = {
   confirmPassword: '',
   age: 0,
 }
-
-const validationSchema = object({
-  email: string()
-    .email('please enter valid Email')
-    .required('Email is required'),
-  name: string().required('name is required'),
-  password: string()
-    .min(8, 'password need to be bigger than 8 characters')
-    .max(14, 'password need to be less than 14 characters')
-    .matches(
-      /^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))/
-    )
-    .required('password is required'),
-  confirmPassword: string()
-    .required()
-    .oneOf([ref('password'), null], 'Passwords must match'),
-  age: number()
-    .min(11, 'you need to be at least 11 years old')
-    .required('age is required'),
-})
 
 const SignUp = () => {
   const navigate = useNavigate()
@@ -102,25 +86,7 @@ const SignUp = () => {
       .catch(function (error) {
         toast.error(error)
       })
-  // userInstance
-  //   .request({
-  //     method: 'POST',
-  //     url: '/register',
-  //     data: values,
-  //   })
-  //   .then(res => {
-  //     toast.success('sign up is done successfully')
 
-  //     setTimeout(() => {
-  //       dispatch(
-  //         signUpHandle({
-  //           ...res.data.user,
-  //         })
-  //       )
-  //       navigate('/', { replace: true })
-  //     })
-  //   })
-  //   .catch(err => console.log(err.message))
   return (
     <Container maxWidth='md' sx={{ margin: '6rem auto' }}>
       <h2>SIGN UP</h2>
@@ -134,7 +100,7 @@ const SignUp = () => {
         <Grid item xs={12} md={6}>
           <Formik
             initialValues={initialValues}
-            validationSchema={validationSchema}
+            validationSchema={signUpValidationSchema}
             onSubmit={handleSubmit}
           >
             {formik => (

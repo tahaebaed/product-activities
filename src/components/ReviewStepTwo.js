@@ -1,10 +1,13 @@
-import { Button, Grid } from '@mui/material'
+import Grid from '@mui/material/Grid'
+import Button from '@mui/material/Button'
 import { Form, Formik } from 'formik'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { object, string } from 'yup'
+import { handleRemoveToCart } from '../store/products/actions'
 import { handleAddToPurchased } from '../store/purchased-product/actions'
 import InputTextField from './InputTextField'
+import { toast } from 'react-toastify'
+import { purchaseValidationSchema } from '../utilities/validationsSchemas'
 
 const initialValues = {
   address: '',
@@ -12,15 +15,7 @@ const initialValues = {
   email: '',
 }
 
-const validationSchema = object({
-  address: string().required('we need your address to confirm the purchase'),
-  phone: string().required('we need your phone to confirm the purchase'),
-  email: string()
-    .email('please enter a valid email')
-    .required('we need the email to confirm the purchase'),
-})
-
-const ReviewStepTwo = ({ handleBack, handleNext }) => {
+const ReviewStepTwo = ({ handleBack, closeModal }) => {
   const inputFields = [
     {
       name: 'email',
@@ -47,13 +42,15 @@ const ReviewStepTwo = ({ handleBack, handleNext }) => {
   const onSubmit = values => {
     setTimeout(() => {
       dispatch(handleAddToPurchased(reviewList, values))
-      handleNext()
+      reviewList.map(prod => dispatch(handleRemoveToCart(prod.id)))
+      toast.success('Purchased is done and the products will arrive in 3 days')
+      closeModal()
     }, 2000)
   }
   return (
     <Formik
       initialValues={initialValues}
-      validationSchema={validationSchema}
+      validationSchema={purchaseValidationSchema}
       onSubmit={onSubmit}
     >
       {formik => (
@@ -82,7 +79,7 @@ const ReviewStepTwo = ({ handleBack, handleNext }) => {
                 type='submit'
                 disabled={!formik.isValid || formik.isSubmitting}
               >
-                next
+                Confirm
               </Button>
             </Grid>
           </Grid>

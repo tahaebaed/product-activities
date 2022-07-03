@@ -1,4 +1,6 @@
-import { Button, CircularProgress, Grid } from '@mui/material'
+import Grid from '@mui/material/Grid'
+import CircularProgress from '@mui/material/CircularProgress'
+import Button from '@mui/material/Button'
 import { Form, Formik } from 'formik'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -9,27 +11,15 @@ import { UploadImg } from '../components/UploadImg'
 import { handleEdit } from '../store/auth/actions'
 
 import '../sass/EditProfile.scss'
-import { Box, Container } from '@mui/system'
+import { Container } from '@mui/system'
+import { editProfileValidationSchema } from '../utilities/validationsSchemas'
 
 const EditProfile = () => {
-  const initialValues = {
-    address: '',
-    phone: '',
-    email: '',
-    name: '',
-    age: '',
-    avatar: '',
-  }
+  const user = useSelector(state => state.user)
 
-  const validationSchema = object({
-    address: string().required('we need your address to confirm the purchase'),
-    phone: string().required('we need your phone to confirm the purchase'),
-    email: string()
-      .email('please enter a valid email')
-      .required('we need the email to confirm the purchase'),
-    name: string().required(),
-    age: number().required(),
-  })
+  const initialValues = {
+    ...user,
+  }
 
   const inputFields = [
     {
@@ -65,7 +55,6 @@ const EditProfile = () => {
     },
   ]
 
-  const user = useSelector(state => state.user)
   const dispatch = useDispatch()
   const onSubmit = values =>
     new Promise((resolve, reject) => {
@@ -88,8 +77,9 @@ const EditProfile = () => {
   return (
     <Formik
       initialValues={initialValues}
-      validationSchema={validationSchema}
+      validationSchema={editProfileValidationSchema}
       onSubmit={onSubmit}
+      enableReinitialize
     >
       {formik => (
         <Form>

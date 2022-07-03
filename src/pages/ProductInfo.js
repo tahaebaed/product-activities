@@ -1,5 +1,8 @@
-import { AddShoppingCartRounded } from '@mui/icons-material'
-import { Container, Grid, IconButton, Typography } from '@mui/material'
+import AddShoppingCartRounded from '@mui/icons-material/AddShoppingCartRounded'
+import Container from '@mui/material/Container'
+import Grid from '@mui/material/Grid'
+import IconButton from '@mui/material/IconButton'
+import Typography from '@mui/material/Typography'
 import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -9,6 +12,8 @@ import CallAPi from '../utilities/callAPi'
 import Loading from '../utilities/Loading'
 import { productInstance } from '../utilities/productsInstance'
 import { toast } from 'react-toastify'
+
+import '../sass/productInfo.scss'
 
 const ProductInfo = () => {
   const { id } = useParams()
@@ -28,7 +33,7 @@ const ProductInfo = () => {
   return isFetching ? (
     <Loading />
   ) : (
-    <Container maxWidth='md' sx={{ margin: '6rem auto' }}>
+    <Container maxWidth='md' sx={{ mt: 6 }}>
       <Grid container alignItems='center'>
         <Grid item xs={12} md={6}>
           <div>
@@ -39,7 +44,7 @@ const ProductInfo = () => {
           <Grid container justifyContent='flex-end'>
             {filtered.length > 0 ? (
               <IconButton
-                className='card-container-cart_btn'
+                className='product-info-container-cart_btn'
                 onClick={() => {
                   dispatch(handleRemoveToCart(data.data.id))
                   toast.info(`${data.data.title} has been removed from cart`)
@@ -49,7 +54,7 @@ const ProductInfo = () => {
               </IconButton>
             ) : (
               <IconButton
-                className='card-container-cart_btn'
+                className='product-info-container-cart_btn'
                 onClick={() => {
                   dispatch(
                     handleAddToCart({

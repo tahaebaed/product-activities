@@ -1,3 +1,4 @@
+import { purchaseComplete } from './mutatingPurchaseFuncs'
 import * as TYPE from './types'
 
 const purchasedProductsReducer = (
@@ -6,25 +7,7 @@ const purchasedProductsReducer = (
 ) => {
   switch (action.type) {
     case TYPE.ADD_TO_PURCHASED:
-      localStorage.setItem(
-        'purchased',
-        JSON.stringify([
-          ...initState,
-          {
-            purchasedAt: new Date().getDate(),
-            items: [...action.payload],
-            details: action.details,
-          },
-        ])
-      )
-      return (initState = [
-        ...initState,
-        {
-          purchasedAt: `${new Date().getFullYear()}-${new Date().getMonth()}-${new Date().getDay()} ${new Date().getHours()}:${new Date().getMinutes()}`,
-          items: [...action.payload],
-          details: action.details,
-        },
-      ])
+      return (initState = purchaseComplete(initState, action))
     default:
       return initState
   }

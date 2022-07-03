@@ -1,5 +1,7 @@
-import { PhotoCamera } from '@mui/icons-material'
-import { Grid, IconButton, Typography } from '@mui/material'
+import PhotoCamera from '@mui/icons-material/PhotoCamera'
+import Grid from '@mui/material/Grid'
+import Typography from '@mui/material/Typography'
+import IconButton from '@mui/material/IconButton'
 import { Field } from 'formik'
 import React, { useEffect, useState } from 'react'
 

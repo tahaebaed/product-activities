@@ -5,13 +5,8 @@ import Step from '@mui/material/Step'
 import StepLabel from '@mui/material/StepLabel'
 import ReviewStepOne from '../components/ReviewStepOne'
 import ReviewStepTwo from '../components/ReviewStepTwo'
-import ReviewStepThree from '../components/ReviewStepThree'
 
-const steps = [
-  'Review You Products',
-  'course pricing details',
-  'course lessons',
-]
+const steps = ['Review You Products', 'you contact details']
 
 export default function ReviewStepper({ closeModal }) {
   const [activeStep, setActiveStep] = React.useState(0)
@@ -33,7 +28,7 @@ export default function ReviewStepper({ closeModal }) {
     <Box sx={{ width: '400px' }}>
       <Stepper activeStep={activeStep} sx={{ mb: 4 }}>
         {steps.map((label, index) => (
-          <Step key={label} completed={completed[index]}>
+          <Step key={index} completed={completed[index]}>
             <StepLabel color='inherit'>{label}</StepLabel>
           </Step>
         ))}
@@ -42,9 +37,12 @@ export default function ReviewStepper({ closeModal }) {
         <React.Fragment>
           {activeStep === 0 && <ReviewStepOne handleNext={handleNext} />}
           {activeStep === 1 && (
-            <ReviewStepTwo handleBack={handleBack} handleNext={handleNext} />
+            <ReviewStepTwo
+              handleBack={handleBack}
+              handleNext={handleNext}
+              closeModal={closeModal}
+            />
           )}
-          {activeStep === 2 && <ReviewStepThree closeModal={closeModal} />}
         </React.Fragment>
       </div>
     </Box>

@@ -1,4 +1,7 @@
-import { Button, CircularProgress, Container, Grid } from '@mui/material'
+import Button from '@mui/material/Button'
+import CircularProgress from '@mui/material/CircularProgress'
+import Container from '@mui/material/Container'
+import Grid from '@mui/material/Grid'
 import { Form, Formik } from 'formik'
 import React from 'react'
 import { useDispatch } from 'react-redux'
@@ -8,36 +11,12 @@ import { object, string, ValidationError } from 'yup'
 
 import InputTextField from '../components/InputTextField'
 import { handleLogin } from '../store/auth/actions'
+import { loginValidationSchema } from '../utilities/validationsSchemas'
 
 const initialValues = {
   email: '',
   password: '',
 }
-
-const validationSchema = object({
-  email: string()
-    .email('please enter valid Email')
-    .required('Email is required'),
-
-  password: string()
-    .min(8, 'password need to be bigger than 8 characters')
-    .max(14, 'password need to be less than 14 characters')
-    .test('is-password', password => {
-      if (
-        !password?.match(
-          /^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))/
-        )
-      ) {
-        new ValidationError(
-          'password need to contain 1 small character,1 capital character,1 special character',
-          string,
-          'password'
-        )
-      }
-      return true
-    })
-    .required('password is required'),
-})
 
 const Login = () => {
   const navigate = useNavigate()
@@ -66,7 +45,6 @@ const Login = () => {
             user.email === values.email.toLowerCase() &&
             user.password === values.password
         )
-      console.log(emailCheck)
       setTimeout(
         () =>
           emailCheck?.length > 0
@@ -94,28 +72,8 @@ const Login = () => {
         navigate('/user/products')
       })
       .catch(function (error) {
-        console.log(error)
         toast.error(error)
       })
-  // userInstance
-  //   .request({
-  //     method: 'POST',
-  //     url: '/user/login',
-  //     data: values,
-  //   })
-  //   .then(res => {
-  //     setTimeout(() => {
-  //       dispatch(
-  //         handleLogin({
-  //           ...res.data.user,
-  //           token: res.data.token,
-  //         })
-  //       )
-  //       navigate('/', { replace: true })
-  //       toast.success('You have logged in')
-  //     })
-  //   })
-  //   .catch(err => toast.error(err.message))
 
   return (
     <Container maxWidth='md' sx={{ margin: '6rem auto' }}>
@@ -130,7 +88,7 @@ const Login = () => {
         <Grid item xs={12} md={6}>
           <Formik
             initialValues={initialValues}
-            validationSchema={validationSchema}
+            validationSchema={loginValidationSchema}
             onSubmit={handleSubmit}
           >
             {formik => (

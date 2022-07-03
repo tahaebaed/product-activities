@@ -1,5 +1,5 @@
-import { Grid } from '@mui/material'
-import { Container } from '@mui/system'
+import Grid from '@mui/material/Grid'
+import Container from '@mui/material/Container'
 import React from 'react'
 
 const ProductContainer = ({ children }) => (

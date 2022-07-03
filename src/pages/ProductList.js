@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material'
+import Grid from '@mui/material/Grid'
 import React, { useLayoutEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import ProductCard from '../components/ProductCard'

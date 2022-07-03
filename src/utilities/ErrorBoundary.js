@@ -1,9 +1,8 @@
 import { useErrorBoundary } from 'react-use-error-boundary'
 
 const ErrorBoundary = ({ children }) => {
-  const [error, resetError] = useErrorBoundary(
-    // You can optionally log the error to an error reporting service
-    (error, errorInfo) => console.error(error, errorInfo)
+  const [error, resetError] = useErrorBoundary((error, errorInfo) =>
+    console.error(error, errorInfo)
   )
   if (error) {
     return (

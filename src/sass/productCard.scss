@@ -31,6 +31,7 @@
 .description {
   overflow: hidden;
   text-overflow: ellipsis;
+  line-height: 1.7rem;
   display: -webkit-box;
   -webkit-line-clamp: 2; /* number of lines to show */
   line-clamp: 2;

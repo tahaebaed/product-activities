@@ -5,8 +5,8 @@ import { toast } from 'react-toastify'
 
 import Box from '@mui/material/Box'
 import { DataGrid } from '@mui/x-data-grid'
-import { IconButton } from '@mui/material'
-import { DeleteForeverRounded } from '@mui/icons-material'
+import IconButton from '@mui/material/IconButton'
+import DeleteForeverRounded from '@mui/icons-material/DeleteForeverRounded'
 import { handleAddAmount, handleRemoveToCart } from '../store/products/actions'
 import FooterDataBtn from '../components/FooterDataBtn'
 import { handleAddToReview } from '../store/review/actions'
@@ -30,7 +30,6 @@ const ProductsCart = () => {
       width: 90,
       editable: true,
       preProcessEditCellProps: params => {
-        console.log(+params.props.value)
         if (params.props.value && params.props.value > 1) {
           dispatch(
             handleAddAmount({
@@ -48,7 +47,7 @@ const ProductsCart = () => {
       sortable: false,
       renderCell: params => {
         const onClick = e => {
-          e.stopPropagation() // don't select this row after clicking
+          e.stopPropagation()
 
           dispatch(handleRemoveToCart(params.id))
           toast.info(`${params.row.name} has been removed`)

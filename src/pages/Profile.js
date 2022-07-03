@@ -1,14 +1,13 @@
 import { Settings } from '@mui/icons-material'
-import {
-  Avatar,
-  Card,
-  CardContent,
-  Grid,
-  IconButton,
-  Tooltip,
-  Typography,
-} from '@mui/material'
-import { Box, Container } from '@mui/system'
+import Avatar from '@mui/material/Avatar'
+import Card from '@mui/material/Card'
+import CardContent from '@mui/material/CardContent'
+import Grid from '@mui/material/Grid'
+import IconButton from '@mui/material/IconButton'
+import Tooltip from '@mui/material/Tooltip'
+import Typography from '@mui/material/Typography'
+import Box from '@mui/system/Box'
+import Container from '@mui/system/Container'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -70,7 +69,7 @@ const Profile = () => {
             </Grid>
           </Box>
         </Grid>
-        <Grid item>
+        <Grid item xs={12}>
           <Box>
             <Grid container direction='column' mt={10}>
               <Typography variant='h4' component='h5'>
@@ -81,10 +80,10 @@ const Profile = () => {
                   You didn't purchase any Item yet
                 </Typography>
               )}
-              {purchased.map(item => (
-                <Grid item key={item.purchasedAt}>
+              {purchased.map((item, index) => (
+                <Grid item key={index}>
                   {item.items.map((prod, index) => (
-                    <Card sx={{ minWidth: 275, mb: 3 }}>
+                    <Card sx={{ minWidth: 275, mb: 3 }} key={index}>
                       <CardContent>
                         <Typography
                           sx={{ fontSize: 14 }}

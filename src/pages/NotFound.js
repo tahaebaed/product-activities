@@ -1,5 +1,7 @@
-import { Button, Grid, Typography } from '@mui/material'
-import { Container } from '@mui/system'
+import Button from '@mui/material/Button'
+import Typography from '@mui/material/Typography'
+import Grid from '@mui/material/Grid'
+import Container from '@mui/system/Container'
 import React from 'react'
 
 const NotFound = () => {
