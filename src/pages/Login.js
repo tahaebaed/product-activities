@@ -7,7 +7,6 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { object, string, ValidationError } from 'yup'
 
 import InputTextField from '../components/InputTextField'
 import { handleLogin } from '../store/auth/actions'

@@ -1,7 +1,7 @@
 import { addNewUser, editUserData } from './mutatingUserFuncs'
 import * as TYPE from './types'
 
-const userReducer = (initState = null, action) => {
+const userReducer = (initState = !!localStorage.getItem('token'), action) => {
   switch (action.type) {
     case TYPE.AUTH_LOGIN:
       localStorage.setItem('token', action.payload.token)
