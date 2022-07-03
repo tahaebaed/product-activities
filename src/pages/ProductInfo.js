@@ -33,14 +33,19 @@ const ProductInfo = () => {
   return isFetching ? (
     <Loading />
   ) : (
-    <Container maxWidth='md' sx={{ mt: 6 }}>
-      <Grid container alignItems='center'>
-        <Grid item xs={12} md={6}>
+    <Container maxWidth='lg' sx={{ mt: 3 }}>
+      <Grid
+        container
+        alignItems='center'
+        justifyContent='space-around'
+        spacing={2}
+      >
+        <Grid item xs={12} md={4}>
           <div>
             <img src={data.data.image} width='200' alt='' />
           </div>
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={8}>
           <Grid container justifyContent='flex-end'>
             {filtered.length > 0 ? (
               <IconButton
@@ -76,7 +81,7 @@ const ProductInfo = () => {
           </Typography>
           <Typography mb={2}>{data.data.title}</Typography>
 
-          <Typography variant='h5' component='h5'>
+          <Typography fullWidth variant='h5' component='h5'>
             Description:
           </Typography>
           <Typography mb={2}>{data.data.description}</Typography>

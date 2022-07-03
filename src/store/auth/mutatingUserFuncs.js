@@ -15,6 +15,10 @@ export const editUserData = (state, action) => {
 }
 
 export const addNewUser = action => {
-  localStorage.setItem('users', JSON.stringify([{ ...action.payload }]))
+  const users = JSON.parse(localStorage.getItem('users'))
+  localStorage.setItem(
+    'users',
+    JSON.stringify([...users, { ...action.payload }])
+  )
   localStorage.setItem('token', action.payload.token)
 }
