@@ -34,6 +34,14 @@ const RenderRoutes = () => (
         }
       />
       <Route
+        path='/login'
+        element={
+          <AuthRoutes redirectTo='/user/products'>
+            <Login />
+          </AuthRoutes>
+        }
+      />
+      <Route
         path='/user/profile'
         element={
           <NoAuthRoutes redirectTo='/'>

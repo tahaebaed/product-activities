@@ -56,12 +56,18 @@ const Header = () => {
     <AppBar position='static'>
       <Container maxWidth='xl'>
         <Toolbar disableGutters>
-          <Shop2Icon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <Shop2Icon sx={{ display: { xs: 'flex', md: 'flex' }, mr: 1 }} />
           <Link variant='h6' component='a' to='/' className='Nav-Link'>
             P-Activities
           </Link>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: 'flex', md: 'none' },
+              justifyContent: 'flex-end',
+            }}
+          >
             <IconButton
               size='large'
               aria-label='account of current user'
@@ -72,17 +78,18 @@ const Header = () => {
             >
               <MenuIcon />
             </IconButton>
+
             <Menu
               id='menu-appbar'
               anchorEl={anchorElNav}
               anchorOrigin={{
                 vertical: 'bottom',
-                horizontal: 'left',
+                horizontal: 'right',
               }}
               keepMounted
               transformOrigin={{
                 vertical: 'top',
-                horizontal: 'left',
+                horizontal: 'right',
               }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
@@ -115,26 +122,7 @@ const Header = () => {
                   ))}
             </Menu>
           </Box>
-          <Shop2Icon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
 
-          <NavLink to=''>
-            <Typography
-              variant='h5'
-              noWrap
-              sx={{
-                mr: 2,
-                display: { xs: 'flex', md: 'none' },
-                flexGrow: 1,
-                fontFamily: 'monospace',
-                fontWeight: 700,
-                letterSpacing: '.3rem',
-                color: 'inherit',
-                textDecoration: 'none',
-              }}
-            >
-              P-Activities
-            </Typography>
-          </NavLink>
           <Box
             sx={{
               flexGrow: 1,

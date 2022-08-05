@@ -15,7 +15,7 @@ export const editUserData = (state, action) => {
 }
 
 export const addNewUser = action => {
-  const users = JSON.parse(localStorage.getItem('users'))
+  const users = JSON.parse(localStorage.getItem('users')) || []
   localStorage.setItem(
     'users',
     JSON.stringify([...users, { ...action.payload }])
