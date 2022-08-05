@@ -7,7 +7,7 @@
     background-color: gray;
   }
   &-cart_btn {
-    position: absolute;
+    position: absolute !important;
     right: 0.5rem;
     top: 0;
   }
@@ -29,6 +29,7 @@
   }
 }
 .description {
+  display: block !important;
   overflow: hidden;
   text-overflow: ellipsis;
   line-height: 1.7rem;
